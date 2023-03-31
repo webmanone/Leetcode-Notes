@@ -37,6 +37,56 @@ Solution:
 4.	Create an if statement that checks if j = needle.length. If so, that means the complete word is in the haystack, and then return the index of the haystack.
 5.	If none of that happens, return -1 as a default.
 
+### 69. Sqrt(x)
+
+#### Description
+
+<p>Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well. You must not use any built-in exponent function or operator. For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.</p>
+ 
+Binary search method:
+
+1. Create 2 variables, left and right to show the lower and upper bounds of the search range. 
+2. Create a while loop that finishes when left is higher than right.
+3. Create variable that will calculate the midpoint using (left + right) / 2).
+4. Calculate the square of the midpoint.
+5. Compare square to x. 
+6. If square is equal to x, that means the midpoint is the square root, so return mid.
+7. Else, adjust search range. If square of midpoint os less than x, we know that the sqrt is to the right of the midpoint, so update left to mid + 1 to narrow range to right half.
+8. If square of midpoint is more than x, the sqrt is to the left of the midpoint, so update right to mid - 1 to narrow search range to left half.
+9. Once left is higher than right, return left - 1 at the end for the result.
+
+Code:
+
+    let left = 0;
+    let right = x;
+
+    while (left <= right) {
+        let mid = Math.floor((left + right)/2);
+        let square = mid * mid;
+
+        if (square === x) {
+            return mid;
+        } else if (square < x){
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    
+    return left - 1;
+
+After looking through other answers, there's also this pretty simple method:
+
+    if (x === 0 || x === 1) {
+        return x;
+    }
+   
+    for (let i = 0; i <= x; i++) {
+        if (i * i > x) {
+            return i - 1
+        }
+    }
+
 ### 141. Linked List Cycle
 
 Since I found this problem by searching by hash map, I thought the best solution would be hash map and came up this this solution:
