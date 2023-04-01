@@ -87,6 +87,58 @@ After looking through other answers, there's also this pretty simple method:
         }
     }
 
+### 70. Climbing Stairs
+
+You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+#### My first solution:
+
+1. Think about the base cases. There's only one way to climb 0 or 1 steps, so initialise an array to store all the different ways, with 1 and 1 as the first 2 vaules.
+2. Loop through all remaining ways until n, starting from 2 since 0 and 1 positions are already there.
+3. The number of steps it will take to reach i is the number of steps it took to reach i - 1 + number of steps it took to reach i - 2. This is because from i-1 and i-2, you can either take 1 or 2 steps to get there. Add the value of i-1 + i-2.
+4. Return the n'th position in the array.
+
+##### Code: 
+```
+ var climbStairs = function(n) {
+    
+    let arr = [1, 1];
+
+    for (let i = 2; i <= n; i++){
+        arr.push(arr[i-1] + arr[i-2])
+    }
+
+    return arr[n];
+
+  };
+  ```
+#### Optimised solution
+  
+When I submitted my answer, I saw that memory was high compared with other solutions. I realised it's possible to have the solution without creating an array, and just storing the previous value and the value before in variables as only the end value matters. This uses O(1) instead of O(n).
+
+1. Declare variables for the previous step and the step before, both initialised to 1.
+2. Loop from 2 to n.
+3. Define a variable to store the value of the current step, which will be assigned to value of previous + step before previous.
+4. Increment the i-2 variable to i-1.
+5. Increment the previous step to current.
+5. Return previous step (since it's assigned to value of current at end of the for loop).
+
+##### Code:
+  ```
+  var climbStairs = function(n) {
+    
+    let backstep = 1;
+    let doubleBackstep = 1;
+
+    for (let i = 2; i <= n; i++){
+        let currentStep = backstep + doubleBackstep;
+        doubleBackstep = backstep;
+        backstep = currentStep;
+    }
+
+    return backstep;
+  };
+```
 ### 141. Linked List Cycle
 
 Since I found this problem by searching by hash map, I thought the best solution would be hash map and came up this this solution:
