@@ -112,7 +112,7 @@ Code:
 
   };
   ```
-#### Optimised solution
+Optimised solution:
   
 When I submitted my answer, I saw that memory was high compared with other solutions. I realised it's possible to have the solution without creating an array, and just storing the previous value and the value before in variables as only the end value matters. This uses O(1) instead of O(n).
 
