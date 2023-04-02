@@ -39,7 +39,7 @@ Solution:
 
 ### 69. Sqrt(x)
 
-#### Description
+Description
 
 <p>Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well. You must not use any built-in exponent function or operator. For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.</p>
  
@@ -91,14 +91,14 @@ After looking through other answers, there's also this pretty simple method:
 
 You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
-#### My first solution:
+My first solution:
 
 1. Think about the base cases. There's only one way to climb 0 or 1 steps, so initialise an array to store all the different ways, with 1 and 1 as the first 2 vaules.
 2. Loop through all remaining ways until n, starting from 2 since 0 and 1 positions are already there.
 3. The number of steps it will take to reach i is the number of steps it took to reach i - 1 + number of steps it took to reach i - 2. This is because from i-1 and i-2, you can either take 1 or 2 steps to get there. Add the value of i-1 + i-2.
 4. Return the n'th position in the array.
 
-##### Code: 
+Code: 
 ```
  var climbStairs = function(n) {
     
@@ -123,7 +123,7 @@ When I submitted my answer, I saw that memory was high compared with other solut
 5. Increment the previous step to current.
 5. Return previous step (since it's assigned to value of current at end of the for loop).
 
-##### Code:
+Code:
   ```
   var climbStairs = function(n) {
     
