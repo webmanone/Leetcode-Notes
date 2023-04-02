@@ -15,7 +15,7 @@
   4.	If list 1 value is lower than list 2, add it to the new node. Vice versa. Then increment current
   5.	If they’re both the same, add the node from list 1, then add the node from list 2. Bring current forward an extra node to compensate.
   6.	Add remaining nodes from whichever list is left.
-  7.	Return new linked list
+  7.	Return new linked list.
 
 ### 26. Remove Duplicates from Sorted Array
 
@@ -138,6 +138,97 @@ Code:
 
     return backstep;
   };
+```
+
+### 88. Merge Sorted Array
+
+Description:
+
+You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+
+My First Solution:
+
+1. Make copy of nums 1.
+2. Loop through each element of the arrays whilst i and j are less than m and n.
+3. Add remaining elements of the array if there's any left over once one is finished.
+
+Notes:
+
+This is very similar to question 21. Merge 2 sorted lists. I did a solution in a similar way, with a few variations to cater for the different data structure.
+
+Code:
+```
+var merge = function(nums1, m, nums2, n) {
+    
+    let nums1Clone = [...nums1];
+
+    let i = 0;
+    let j = 0;
+    let x = 0;
+
+    while (i < m && j < n) {
+
+        if (nums1Clone[i] > nums2[j]){
+            nums1[x] = nums2[j];
+            j++;
+            x++;
+        } else if (nums1Clone[i] < nums2[j]){
+            nums1[x] = nums1Clone[i];
+            i++;
+            x++;
+        } else {
+            nums1[x] = nums1Clone[i];
+            i++;
+            x++;
+            nums1[x] = nums2[j];
+            j++;
+            x++;
+        }
+
+    }
+
+    while (i < m) {
+        nums1[x] = nums1Clone[i];
+        i++;
+        x++;
+    }
+
+    while (j < n) {
+        nums1[x] = nums2[j];
+        j++;
+        x++;
+    }
+
+};
+```
+
+On reflection, an optimisation could be remoing the need to clone nums1. I clone it in my solution so that numbers that need to be included aren't overwritten, however by iterating backwards through the arrays, it will start by filling the 0's. Even if all the nums2 numbers are bigger than nums1, it won't overwrite anything since there are n 0's at the end of nums1.
+
+```
+let i = m - 1;
+    let j = n - 1;
+    let x = m + n - 1;
+
+    while (i >= 0 && j >= 0) {
+        if (nums1[i] > nums2[j]) {
+            nums1[x] = nums1[i];
+            i--;
+        } else {
+            nums1[x] = nums2[j];
+            j--;
+        }
+        x--;
+    }
+
+    while (j >= 0) {
+        nums1[x] = nums2[j];
+        j--;
+        x--;
+    }
 ```
 ### 141. Linked List Cycle
 
