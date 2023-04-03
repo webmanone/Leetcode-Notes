@@ -230,6 +230,81 @@ let i = m - 1;
         x--;
     }
 ```
+### 94. Binary Tree Inorder Traversal
+
+Description:
+
+Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+Recursive approach:
+
+1. Create array to contain result.
+2. Define a function to traverse the tree, defining (node) as a paremeter.
+3. If a node isn't null, call the function recursively, for the left node. This is because it's getting the values in order, and the leftmost will be the lowest.
+4. Once the leftmost item has been called, it's left value will be null, so push the current node's value to the array.
+5. Then, call the function for the right node. This will look for the right node on the leftmost node, and then work it's way up.
+6. Call the traverse function, passing root as an argument.
+7. Return the resulting array.
+
+Code: 
+```
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function(root) {
+   let result = [];
+
+   function traverse(node) {
+       if (node) {
+           traverse(node.left);
+           result.push(node.val);
+           traverse(node.right);
+       }
+   }
+
+   traverse(root);
+   return result;
+};
+```
+You can also use an iterative approach:
+
+1. Create array to contain the result.
+2. Create a stack that will be used throughout the code.
+3. Define node as root node.
+4. Create while loop that keeps looping as long as node isn't null or if the stack contains any elements.
+5. Create another while loop inside that loops as long as node isn't null, that pushes the current node and then assigns node to node.left. This will make it so the smallest node is on top of the stack.
+6. When there aren't any more leftmost nodes, change node to the top element on the stack by popping the top item.
+7. Push this to the result array.
+8. Change node to node.right. The outer while loop will reset and then it will push that to the stack, and then look at it's left node. This will continue until all nodes have been iterated through.
+9. Return result array.
+
+```
+    let result = [];
+    let stack = [];
+    let node = root;
+    
+    while (node || stack.length > 0) {
+        while (node) {
+            stack.push(node);
+            node = node.left;
+        }
+        node = stack.pop();
+        result.push(node.val);
+        node = node.right;
+    }
+    
+    return result;
+```
+
 ### 141. Linked List Cycle
 
 Since I found this problem by searching by hash map, I thought the best solution would be hash map and came up this this solution:
