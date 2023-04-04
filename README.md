@@ -305,6 +305,55 @@ You can also use an iterative approach:
     return result;
 ```
 
+### 101. Symmetric Tree
+
+Description:
+
+Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+
+Solution (recursive):
+
+1. Create a function that will traverse the left side and right side of the tree, taking in node1 and node2 as parameters.
+2. Check base cases. For example if both sides are null, they are symmetric, if one node is null and other isn't, or if the values of node1 and node2 are different then they are not symmetric, so return false.
+3. When returning the additional function, check if the left and right of each node is the same. e.g. comparing node1 left and node2 right and comparing node1 right and node2 left.
+4. Return the function and pass the left and right node of the root.
+
+Code:
+
+```
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function(root) {
+   
+    function isMirror(node1, node2) {
+
+        if (!node1 && !node2) {
+            return true;
+        }
+
+        if (!node1 || !node2) {
+            return false;
+        }
+        if (node1.val !== node2.val) {
+            return false;
+        }
+        ```
+        return isMirror(node1.left, node2.right) && isMirror(node1.right, node2.left);
+    }
+    
+    return isMirror(root.left, root.right);
+};
+```
 ### 141. Linked List Cycle
 
 Since I found this problem by searching by hash map, I thought the best solution would be hash map and came up this this solution:
