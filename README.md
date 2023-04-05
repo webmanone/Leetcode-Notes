@@ -354,6 +354,64 @@ var isSymmetric = function(root) {
     return isMirror(root.left, root.right);
 };
 ```
+
+### 104. Maximum Depth of Binary Tree
+
+Given the root of a binary tree, return its maximum depth.
+
+A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+Solution:
+
+1. Define variable to contain maximum depth. Initialise to 0.
+2. Define recursive function that will traverse left and right nodes, passing node and current depth as parameters.
+3. (First check that node isn't null) If there is a left node, call the traverse function, passing node.left and currentDepth + 1 as a parameter.
+4. If there's a right node, do the same.
+5. If the left node and right node aren't null (if there's no nodes left on left or right), update depth to the max of depth and current depth.
+6. Call the traverse function for first time, passing in root and 1 as default values.
+7. Return depth variable for answer.
+
+Code:
+
+
+```
+var maxDepth = function(root) {
+    
+    let depth = 0;
+    function traverse(node, currentDepth){
+        if (node){
+          if (node.left) {
+          traverse(node.left, currentDepth + 1);
+          }
+          if (node.right) {
+              traverse(node.right, currentDepth + 1);
+          }
+
+          if (!node.left && !node.right){
+              depth = Math.max(depth, currentDepth);
+          }
+        }
+    }
+
+    traverse(root, 1);
+
+return depth;
+
+};
+```
+There's also a simpler solution:
+
+```
+if (root === null) {
+        return 0;
+    }
+    else {
+        let leftDepth = maxDepth(root.left);
+        let rightDepth = maxDepth(root.right);
+        return 1 + Math.max(leftDepth, rightDepth);
+    }
+```
+
 ### 141. Linked List Cycle
 
 Since I found this problem by searching by hash map, I thought the best solution would be hash map and came up this this solution:
