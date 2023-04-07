@@ -411,6 +411,40 @@ if (root === null) {
         return 1 + Math.max(leftDepth, rightDepth);
     }
 ```
+### 108. Convert Sorted Array to Binary Search Tree
+
+Problem:
+
+Given an integer array nums where the elements are sorted in ascending order, convert it to a 
+height-balanced binary search tree.
+
+Solution:
+
+1. The function will be called recursively. Aim is to find the midpoint of array, then define that as a node, and then go to each left and right node until both are null. Therefore, start with the end case, which will be if there are no elements left in the array (or sub-array), return null. 
+2. Define midpoint as the middle of the array (or sub-array).
+3. Define the current node (which could be the root or a leaf on the tree) as the value in the array of the current midpoint.
+4. Make the function recur for the left node, but using the first half of the array (using slice).
+5. Do the same fir the right node.
+6. Return the head node.
+
+Code:
+
+```
+var sortedArrayToBST = function(nums) {
+    
+  if (nums.length === 0) {
+    return null;
+  }
+
+  const mid = Math.floor(nums.length / 2);
+  const node = new TreeNode(nums[mid]);
+
+  node.left = sortedArrayToBST(nums.slice(0, mid));
+  node.right = sortedArrayToBST(nums.slice(mid + 1));
+
+  return node;
+};
+```
 
 ### 141. Linked List Cycle
 
