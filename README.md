@@ -445,6 +445,53 @@ var sortedArrayToBST = function(nums) {
   return node;
 };
 ```
+#118. Pascal's Triangle
+
+Problem:
+
+Given an integer numRows, return the first numRows of Pascal's triangle. In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
+
+![PascalTriangleAnimated2](https://user-images.githubusercontent.com/66835665/230636824-4818a993-60ce-4dac-be19-30bfd623ca37.gif)
+
+Solution I got first try:
+
+1. Create a matrix to contain the arrays which will act as the rows of the triangle. 
+2. Initialise the matrix to [1] for the base case that rows = 1. If rows = 1, return the matrix as is.
+3. Update matric to [1], [1, 1] for the case that rows = 2 and return the matrix if it's 2.
+4. Create a for loop that cycles through all the rows from row 3 to max row.
+5. Create an array that will reset every loop, and contain the numbers for each row.
+6. Push 1 to the start, since every row will start with 1.
+7. Create for loop nested inside that cycles through the length of the previous entry in the matrix. (Starting from index 1 since index 0 is already 1.
+8. Inside this loop, push the value of the previous index + current index.
+9. Push 1 at the end to finish the row.
+10. Push the array to the matrix.
+11. Return the matrix.
+
+Code:
+```
+var generate = function(numRows) {
+    let matrix = [[1]];
+    if (numRows === 1) {
+        return matrix;
+    }
+    matrix = [[1], [1, 1]];
+    if (numRows === 2) {
+        return matrix;
+    }
+
+    for (let i = 2; i < numRows; i++){
+        let arr = [];
+        arr.push(1);
+      for (let j = 1; j < matrix[i-1].length; j++){
+          arr.push(matrix[i-1][j-1] + matrix[i-1][j]);
+       }
+       arr.push(1);
+       matrix.push(arr);
+    }
+    
+ return matrix;
+};
+```
 
 ### 141. Linked List Cycle
 
