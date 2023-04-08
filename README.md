@@ -492,6 +492,67 @@ var generate = function(numRows) {
  return matrix;
 };
 ```
+### 121. Best Time to Buy and Sell Stock
+
+Problem:
+You are given an array prices where prices[i] is the price of a given stock on the ith day. You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+Solution:
+
+In my first attempt, I came up with this solution. It works, however it has a time complexity of O(n^2) as it compares every pair of prices, making it inefficient for large input:
+
+```
+var maxProfit = function(prices) {
+    
+    let profit = 0;
+
+    for (let i = prices.length - 1; i > 0; i--) {
+       for (let j = i - 1; j > -1; j--){
+           if (prices[i] < prices[j]){
+               continue;
+           }
+           let calculation = prices[i] - prices[j];
+           if (calculation > profit){
+           profit = calculation;
+           }
+       }
+    }
+
+return profit;
+
+};
+```
+
+A more efficient solution would be to keep track of the lowest price, and then compare it against future values and keep track of maximum profit:
+
+1. Define variables to contain the minimum price and maximum profit.
+2. Loop through all elements in the array.
+3. If the price at current index is lower than the minimum price, update minimum price to hold that value.
+4. Else, if it's larger, define a variable to keep track of that profit.
+5. If the profit is bigger than the maximum profit, assign that value to max profit.
+6. Return the maximum profit.
+
+Code:
+```
+var maxProfit = function(prices) {
+    
+    let minPrice = Infinity;
+    let maxProfit = 0;
+
+    for (let i = 0; i < prices.length; i++) {
+        if (prices[i] < minPrice) {
+            minPrice = prices[i];
+        } else {
+            let thisProfit = prices[i] - minPrice;
+            if (thisProfit > maxProfit){
+                maxProfit = thisProfit;
+            }
+        }
+    }
+    return maxProfit;
+    
+};
+```
 
 ### 141. Linked List Cycle
 
