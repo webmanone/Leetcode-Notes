@@ -554,6 +554,66 @@ var maxProfit = function(prices) {
 };
 ```
 
+### 125. Valid Palindrome
+
+Problem:
+
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers. Given a string s, return true if it is a palindrome, or false otherwise.
+
+My first solution:
+
+1. Convert the string to lowercase and remove non-alphanumeric characters. Can use the toLowerCase() and replace() functions.
+2. Create an array of the characters in the clean string using split() function.
+3. Reverse array using reverse() function.
+4. Store reversed array as a string in a variable using join() function.
+5. Return if the clean string is the same as reversed string.
+
+Code:
+```
+var isPalindrome = function(s) {
+    const sClean = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+    
+    let arr = sClean.split('');
+    arr.reverse();
+    const reversed = arr.join('');
+    
+    return sClean === reversed;
+};
+```
+Time = O(n), Space = O(n).
+
+This solution is simple and works well, but the 2 pointer solution is most efficient since it has space complexity of O(1).
+
+2 pointer solution:
+
+1. Convert string to a clean version using toLowerCase() and replace() functions.
+2. Define 2 pointers, left and right for the start and end of the string.
+3. Loop through the string, comparing the left and right pointers while left is smaller than right (when they meet in the middle).
+4. Return false if letter at left index in the string doesn't equal right index.
+5. Increment left, decrement right.
+6. Return true.
+
+Code:
+
+```
+var isPalindrome = function(s) {
+    const sClean = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+    
+    let left = 0;
+    let right = sClean.length - 1;
+
+    while (left < right){
+        if (sClean[left] !== sClean[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    
+    return true;
+};
+```
+
 ### 141. Linked List Cycle
 
 Since I found this problem by searching by hash map, I thought the best solution would be hash map and came up this this solution:
