@@ -613,7 +613,34 @@ var isPalindrome = function(s) {
     return true;
 };
 ```
+### 136. Single Number
 
+Description:
+
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one. You must implement a solution with a linear runtime complexity and use only constant extra space.
+
+Solution:
+
+1. Set result variable to 0.
+2. Create a for loop that loops through all numbers in the array.
+3. Use XOR operator(^) to compare result to the number at current iteration, and assign the result of that to the result variable.
+4. Return result.
+
+This works because when 2 binary numbers are compared with XOR, if they are not the same, a different number is produced. If the same number appears again in the array, it will cancel out the binary number. Therefore, the only number left will be the single number in the array at the end.
+
+Code:
+```
+var singleNumber = function(nums) {
+
+    let result = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        result ^= nums[i];
+    }
+    
+    return result;
+};
+```
 ### 141. Linked List Cycle
 
 Since I found this problem by searching by hash map, I thought the best solution would be hash map and came up this this solution:
