@@ -678,7 +678,7 @@ However, I now realise that you can also do this with hare and tortoise method, 
 5. Return false if there are no cycles.
 
 Code:
-    
+```    
     let slow = head;
     let fast = head;
     
@@ -692,3 +692,101 @@ Code:
     }
     
     return false;
+```
+
+### 160. Intersection of Two Linked Lists
+
+Problem:
+
+Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.
+
+For example, the following two linked lists begin to intersect at node c1:
+![160_statement](https://user-images.githubusercontent.com/66835665/230890978-addad37c-d5b5-4f91-9aa8-eadfb6fb46e5.png)
+
+My first solution:
+
+1. Define an array to store the nodes visited by the first linked list.
+2. Define a pointer and initialise it to headA.
+3. Loop through all nodes of the first linked list and push each node to the array.
+4. Change current to head of the second linked list.
+5. Loop though all nodes, if the array includes current, return that, else go to the next node
+6. Return null if nothing has been found.
+
+Code:
+
+`
+var getIntersectionNode = function(headA, headB) {
+    
+    let nodes = [];
+
+    let current = headA;
+
+    while (current){
+        nodes.push(current);
+        current = current.next;
+    }
+
+    current = headB;
+
+    while (current){
+        if (nodes.includes(current)) {
+            return current;
+        } else {
+            current = current.next;
+        }
+    }
+
+return null;
+
+};
+```
+
+However, this isn't as memory efficient as it could be. A more efficient solution would be:
+
+1. Initialise 2 pointers to point to head A and head B.
+2. While pointer A doesn't equal pointer B, loop through nodes.
+3. If pointer A isn't null, move it to the next node.
+4. If it is null, change it to head B so it loops through the second list. (They'll eventually meet if they intersect, even if one is shorter because by looping through the other list, they will catch up at the intersection.
+5. Do the same for pointer B.
+6. Return pointer A. This is because if they are the same, the loop will exit so you could return either A or B. If they on't intersect, A will have reached the end of head B and will be null.
+
+Code:
+```
+var getIntersectionNode = function(headA, headB) {
+    
+    let pA = headA;
+    let pB = headB;
+
+    while (pA !== pB) {
+        if (pA !== null) {
+            pA = pA.next;
+        } else {
+            pA = headB;
+        }
+
+        if (pB !== null) {
+            pB = pB.next;
+        } else {
+            pB = headA;
+        }
+    }
+
+    return pA;
+
+};
+```
+This can also be written more consicely with ternary operators:
+```
+var getIntersectionNode = function(headA, headB) {
+    
+    let pA = headA;
+    let pB = headB;
+
+    while (pA !== pB) {
+        pA = pA ? pA.next : headB;
+        pB = pB ? pB.next : headA;
+    }
+
+    return pA;
+};
+```
