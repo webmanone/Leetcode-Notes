@@ -790,3 +790,81 @@ var getIntersectionNode = function(headA, headB) {
     return pA;
 };
 ```
+169. Majority Element
+
+Problem:
+Given an array nums of size n, return the majority element. The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+My first solution:
+1. Declare variable for midpoint of the length of the array.
+2. Set a counter and a variable to track the position which element is going to be tested to 0.
+3. Set a variable to the current element being tested e.g. (nums[position]).
+4. Create a for loop that loops from start to finish of array.
+5. If nums[i] is the same as the current element we are testing, increment counter by 1.
+6. If counter gets higher than mid, return element.
+7. Else, if i gets to the end of the array, reset the counter, change the position in the array we're testing by 1 and initialise i back to 0.
+
+Code:
+```
+var majorityElement = function(nums) {
+    
+    const mid = nums.length/2;
+    let counter = 0;
+    let init = 0;
+    let element = nums[init];
+    
+    for (let i = 0; i < nums.length; i++){
+        if (nums[i] === element){
+            counter++;
+        }
+        if (counter > mid){
+            return element;
+        } else if (i === nums.length - 1){
+            counter = 0;
+            init++;
+            element = nums[init];
+            i = 0;
+        }
+    }
+    
+};
+```
+It works but is horribly inefficient for time since it uses a nested for loop using init.
+
+A more efficient solution would be:
+
+1. Set midpoint to half of array length.
+2. Set counter to 0;
+3. Set element we are testing to null.
+4. Create for loop that loops through all elements in the array.
+5. Create variable num that will store current number.
+6. If the counter is 0, set element to num.
+7. If num = element, increment counter, else decrement counter.
+8. Return the element.
+
+This works better by removing the nested loop, and incrementing and decrementing the counter, and defining the current element within the loop. By incrementing and decrementing the counter when an element appears or doesn't appear, I don't even need to put a check in to see if the counter is higher than mid. This is because if an element isn't majority, it will eventually go back to 0, which will reset the chosen element to the current number in the array. If an element is majority, it won't reset back to 0 and will be output when the for loop finishes.
+
+Note: I can only skip this step because a majority is guaranteed.
+
+Code:
+
+```
+const mid = nums.length/2;
+    let counter = 0;
+    let element = null;
+    
+    for (let i = 0; i < nums.length; i++){
+        let num = nums[i];
+        if (counter === 0){
+            element = num;
+        }
+        if (num === element) {
+            counter++;
+        } else{
+            counter--;
+        }
+    }
+    return element;
+};
+```
+
