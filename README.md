@@ -868,3 +868,60 @@ const mid = nums.length/2;
 };
 ```
 
+171. Excel Sheet column Number
+
+Problem: Given a string columnTitle that represents the column title as appears in an Excel sheet, return its corresponding column number.
+
+Solution:
+1. Create a hash map containing vaules e.g. ["A", 1], ["B", 2].
+2. Initialise variable total to 0.
+3. Initialise variable n to length of column title.
+4. Loop through each char in column title.
+5. Declare variable to get the value of the letter in column title, starting at the end (lowest) which will be n - i - 1.
+6. Add the letter value of lettervalue * Math.pow(26, i) to the total.
+7. Return total.
+
+Code:
+```
+var titleToNumber = function(columnTitle) {
+    const map = new Map([
+        ["A", 1],
+        ["B", 2],
+        ["C", 3],
+        ["D", 4],
+        ["E", 5],
+        ["F", 6],
+        ["G", 7],
+        ["H", 8],
+        ["I", 9],
+        ["J", 10],
+        ["K", 11],
+        ["L", 12],
+        ["M", 13],
+        ["N", 14],
+        ["O", 15],
+        ["P", 16],
+        ["Q", 17],
+        ["R", 18],
+        ["S", 19],
+        ["T", 20],
+        ["U", 21],
+        ["V", 22],
+        ["W", 23],
+        ["X", 24],
+        ["Y", 25],
+        ["Z", 26],
+    ]);
+
+    let total = 0;
+    let n = columnTitle.length;
+
+    for (let i = 0; i < n; i++){
+        let letterValue = map.get(columnTitle.charAt(n - i - 1));
+        total += letterValue * Math.pow(26, i);
+    }
+
+    return total;
+
+};
+```
