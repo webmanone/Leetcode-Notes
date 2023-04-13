@@ -925,3 +925,39 @@ var titleToNumber = function(columnTitle) {
 
 };
 ```
+206. Reverse Linked List
+
+Problem:
+
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+Solution:
+1. Set 3 pointers: current, previous and next.
+2. Set current to head, then previous and next to null.
+3. While current is not null, loop through the nodes.
+4. First, deal with the next pointer and move it to the next node with current.next.
+5. Then, since we now have the next pointer stored, change the current.next pointer to previous, which will initially be null since it will be the new end of the list.
+6. Then, move previous up to current.
+7. Finally, move current to next.
+8. Return previous. Don't return current because it wil have exited the while loop and therefore previous will be set to the current head.
+
+Tip: Remember that in the while loop, the order you need to deal with is dealing with the assigned value each time. E.g. starting with next = current.next, you then do current.next = previous, then previous=...
+
+Code:
+```
+var reverseList = function(head) {
+    let current = head;
+    let previous = null;
+    let next = null;
+
+    while (current){
+        next = current.next;
+        current.next = previous;
+        previous = current;
+        current = next;
+    }
+
+    return previous;
+};
+```
+
