@@ -960,4 +960,36 @@ var reverseList = function(head) {
     return previous;
 };
 ```
+344. Reverse String
 
+Problem:
+
+Write a function that reverses a string. The input string is given as an array of characters s.
+
+You must do this by modifying the input array in-place with O(1) extra memory.
+
+Solution:
+There are plenty of ways to do it, I first did it with a for loop, then with a while loop, and in JS you can even do this in 1 line with s.reverse();
+
+However, the general idea is:
+
+1. Define 2 pointers, start and end. Start being initialised to the 0th element in the array, end being initialised to the last.
+2. While start is smaller than end, assign the value of s[end] to s[start] and vice versa.
+3. This can be done by having a storage variable to store the value of start before it's overwritten, or by using destructuring assignment, which reassigns the variables without the need for an extra storage variable.
+4. If using a while loop, be sure to increment and decrement start and end respectively at the end. In the for loop this will be done automatically.
+5. Return s.
+
+Code:
+```
+var reverseString = function(s) {
+    let start = 0;
+    let end = s.length - 1;
+   
+    while (start < end){
+        [s[start], s[end]] = [s[end], s[start]];
+        start++;
+        end--;
+    }
+    return s;
+};
+```
