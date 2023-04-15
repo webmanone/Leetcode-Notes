@@ -925,6 +925,75 @@ var titleToNumber = function(columnTitle) {
 
 };
 ```
+
+202. Happy Number
+
+Problem:
+
+Write an algorithm to determine if a number n is happy.A happy number is a number defined by the following process:
+Starting with any positive integer, replace the number by the sum of the squares of its digits. Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy. Return true if n is a happy number, and false if not.
+
+My first solution:
+
+1. Define an array of results so that the results of squaring all the digits can be stored for future reference.
+2. The solution will require recursion, so define another function that will recur.
+3. Declare an array of digits that changes the int to a string and splits the number into seperate elements in an array.
+4. Now the numbers are stored, reset n to 0;
+5. Loop through all elements of the array, squaring them and adding them to n.
+6. After this, if n is 1, return true.
+7. Else, if the results array already includes the number n, return false.
+8. Push n into the results array. 
+9. Return result of the inner function.
+10. Return result of inner function in outer function.
+
+Code:
+```
+var isHappy = function(n) {
+    let results = [];
+    var isHappyCheck = function(n) {
+        let digits = n.toString().split('');
+        n = 0;
+       
+        for (let i = 0; i < digits.length; i++){
+            n += digits[i] * digits[i];
+        } 
+
+        if (n === 1){
+            return true;
+        } else if (results.includes(n)){
+            return false;
+        }
+
+        results.push(n);
+        return isHappyCheck(n);
+    };
+    return isHappyCheck(n);
+};
+```
+Another solution that would be a bit more efficient would use the hare and tortoise approach:
+
+```
+var isHappy = function(n) {
+    function sumOfSquares(n) {
+        let sum = 0;
+        while (n > 0) {
+            let digit = n % 10;
+            sum += digit * digit;
+            n = Math.floor(n / 10);
+        }
+        return sum;
+    }
+
+    let slow = n;
+    let fast = sumOfSquares(n);
+    while (fast !== 1 && slow !== fast) {
+        slow = sumOfSquares(slow);
+        fast = sumOfSquares(sumOfSquares(fast));
+    }
+    return fast === 1;
+};
+```
+
 206. Reverse Linked List
 
 Problem:
