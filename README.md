@@ -1029,6 +1029,54 @@ var reverseList = function(head) {
     return previous;
 };
 ```
+217. Contains Duplicate
+Problem:
+
+Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+My first solution:
+
+1. Create for loop through nums - 1.
+2. Create for loop setting j to i+1.
+3. If nums[i] === nums[j] return true.
+4. Else return false.
+
+Code:
+```
+var containsDuplicate = function(nums) {
+   for (let i = 0; i < nums.length - 1; i++){
+        for (let j = i+1; j < nums.length; j++){
+            if (nums[i] === nums[j]){
+                return true;
+            }
+        }
+   }
+    return false;
+};
+```
+It was good memory wise but terrible for time complexity because of the nested for loops.
+
+A more time efficient solution would be to use a hash set, wich is a data structure that stores a collection of unique elements in no particular order (which is faster than an array):
+
+1. Create new hash set.
+2. Loop through all elements of the array.
+3. If the set has nums[i], return true.
+4. Else add nums[i] to the set.
+5. Return false when all elements of array are checked.
+
+Code:
+```
+var containsDuplicate = function(nums) {
+    const set = new Set();
+    for (let i = 0; i < nums.length; i++) {
+        if (set.has(nums[i])) {
+            return true;
+        }
+        set.add(nums[i]);
+    }
+    return false;
+};
+```
 344. Reverse String
 
 Problem:
