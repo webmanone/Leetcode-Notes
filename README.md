@@ -1077,6 +1077,73 @@ var containsDuplicate = function(nums) {
     return false;
 };
 ```
+242. Valid Anagram
+
+Problem:
+
+Given two strings s and t, return true if t is an anagram of s, and false otherwise. An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+My first attempt code:
+```
+var isAnagram = function(s, t) {
+    let arr = s.split("");
+
+    for(let i = 0; i < s.length; i++){
+        if (arr.includes(t[i])){
+            let index = arr.indexOf(t[i]);
+            arr.splice(index, 1);
+        }
+    }
+    
+    if (arr.length === 0 && s.length === t.length){
+        return true;
+    } else {
+
+    return false;
+    
+    }
+};
+```
+Better solution that has time and space complexity of O(n), which involves creating a hash table then looping through each string:
+
+1. Check if the length of both strings are the same. If so, return false.
+2. Create a hash map.
+3. Loop through all characters in the s string. 
+4. Declare a constant variable of char for the index of the string.
+5. If char is in the hash table, set it's value to hash char + 1. Else, set it to 1.
+6. Create another for loop to loop through the characters in the second string.
+7. Declare a const variable to keep track of the current character.
+8. If it doesn't exist in the hash table, return false.
+9. Reduce the quantity of the char in the hash table by one.
+10. Return true.
+
+Code:
+```
+var isAnagram = function(s, t) {
+    if (s.length !== t.length) {
+        return false;
+    }
+    
+    const hash = {};
+    
+    for (let i = 0; i < s.length; i++) {
+        const char = s[i];
+        hash[char] = hash[char] + 1 || 1;
+
+    }
+    
+    for (let i = 0; i < t.length; i++) {
+        const char = t[i];
+        if (!hash[char]) {
+            return false;
+        }
+        hash[char]--;
+    }
+
+    return true;
+};
+```
+
 344. Reverse String
 
 Problem:
