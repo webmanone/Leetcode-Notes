@@ -1143,6 +1143,52 @@ var isAnagram = function(s, t) {
     return true;
 };
 ```
+268. Missing Number
+
+Problem:
+
+Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+
+There's a lot of ways to do this, but my first solution was:
+
+```
+var missingNumber = function(nums) {
+    for (let i = 0; i < nums.length; i++){
+        if (!nums.includes(i)){
+            return i;
+        }
+    }
+    return nums.length;
+};
+```
+This isn't great time efficiency since it uses includes. 
+
+A better solution would be:
+1. Create a set of the array. This is more efficient because sets have constant time lookup, meaning that it's quicker to check if an element exists compared to an array.
+2. Loop through all the numbers that should be in the array, from 0 to <= nums.length.
+3. If the set doesn't have i, return i.
+
+Code:
+```
+var missingNumber = function(nums) {
+    const set = new Set(nums);
+    for (let i = 0; i <= nums.length; i++){
+        if (!set.has(i)) {
+            return i;
+        }
+    }
+};
+```
+There are also funky solutions like this, using the formula based on the sum of an arithmetic progression. This is slightly more efficient, however it can be confusing to read:
+
+```
+function missingNumber(nums) {
+    const n = nums.length;
+    const expectedSum = (n * (n + 1)) / 2;
+    const actualSum = nums.reduce((sum, num) => sum + num, 0);
+    return expectedSum - actualSum;
+}
+```
 
 344. Reverse String
 
