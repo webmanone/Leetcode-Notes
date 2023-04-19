@@ -714,7 +714,7 @@ My first solution:
 
 Code:
 
-`
+```
 var getIntersectionNode = function(headA, headB) {
     
     let nodes = [];
@@ -752,7 +752,7 @@ However, this isn't as memory efficient as it could be. A more efficient solutio
 
 Code:
 ```
-var getIntersectionNode = function(headA, headB) {
+    var getIntersectionNode = function(headA, headB) {
     
     let pA = headA;
     let pB = headB;
