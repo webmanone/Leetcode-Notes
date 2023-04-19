@@ -1189,7 +1189,40 @@ function missingNumber(nums) {
     return expectedSum - actualSum;
 }
 ```
+283. Move Zeroes
 
+Problem:
+
+Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements. Note that you must do this in-place without making a copy of the array.
+
+Solution:
+
+Use 2 pointers. One to keep track of where the next non-zero integer should be, and one for where it actually is.
+
+1. Define first pointer to 0. All the 0s are supposed to be at the end of the array, so the first element in the array should definitely be a non-zero if there are any.
+2. Loop through all elements in the array with the second pointer (i).
+3. If the second pointer reaches an array that isn't 0, we need to bring it to the front of the array. Therefore:
+4. Store the element at the index of the first pointer in a temporary variable, since it's being overwritten. 
+5. Set the value at the first pointer to the value at the second pointer.
+6. Set the value of the second pointer to the value at the first pointer, which is now stored in the temporary variable.
+7. Increment the first pointer by one, as there should be a number there.
+8. Since it's in-place, no need to return anything.
+
+Code:
+```
+var moveZeroes = function(nums) {
+    let nonZeroIndex = 0;
+
+    for (let i = 0; i < nums.length; i++){
+        if (nums[i] !== 0){
+            const storage = nums[nonZeroIndex];
+            nums[nonZeroIndex] = nums[i];
+            nums[i] = storage;
+            nonZeroIndex++;
+        }
+    }
+};
+```
 344. Reverse String
 
 Problem:
