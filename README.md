@@ -1223,6 +1223,32 @@ var moveZeroes = function(nums) {
     }
 };
 ```
+326. Power of 3
+
+Problem:
+Given an integer n, return true if it is a power of three. Otherwise, return false. An integer n is a power of three, if there exists an integer x such that n == 3^x.
+
+Solution:
+
+The point is, if n is equal to 3^x, it doesn't matter what x is, if it's true, n will still be a multiple of 3.
+
+1. If n is 0, return false.
+2. While n mod 3 is 0 (while n is a multiple of 3), divide n by 3.
+3. If n is a multiple of 3, it will eventually return 1 since 3/3 is 1. Therefore, return if n equals 1 or not.
+
+Code:
+```
+var isPowerOfThree = function(n) {
+    if (n === 0) {
+    return false;
+  }
+  while (n % 3 === 0) {
+    n /= 3;
+  }
+  return n === 1;
+};
+```
+
 344. Reverse String
 
 Problem:
