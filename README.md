@@ -1282,3 +1282,39 @@ var reverseString = function(s) {
     return s;
 };
 ```
+350. Intersection of Two Arrays II
+
+Problem:
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
+
+Solution:
+
+1. Create a hash table.
+2. Create an array to store the result.
+3. Loop through all elements in the first array. Add each element to the hash table, increasing its frequency for each time it appears.
+4. Loop through all elements in the second array. If the element is in the hash table, push the element to the result array, and decrease its frequency in the hash table.
+5. Return the resulting array.
+
+Code:
+```
+var intersect = function(nums1, nums2) {
+    const hash = {};
+    const result = [];
+
+    for (let i = 0; i < nums1.length; i++) {
+        const num = nums1[i];
+        hash[num] = hash[num] + 1 || 1;
+    }
+
+    for (let i = 0; i < nums2.length; i++) {
+        const num = nums2[i];
+        
+        if (hash[num] > 0){
+            result.push(num);
+            hash[num]--;
+        }
+    }
+    
+    return result;
+};
+```
