@@ -925,7 +925,53 @@ var titleToNumber = function(columnTitle) {
 
 };
 ```
+190. Reverse Bits
 
+Problem: Reverse bits of a given 32 bits unsigned integer.
+
+Solution:
+1. Define a variable result and set it to 0. This will contain the reversed integer.
+2. Create a for loop to loop through all 32 bits.
+3. Shift result to the left with << 1.
+4. Use an OR operation on result: result | (n&1).
+5. Shift n to the right.
+6. Return result, converting it to an unsigned integer using >>>.
+
+Code:
+```
+var reverseBits = function(n) {
+    let result = 0;
+    for (let i = 0; i < 32; i++) {
+        result = result << 1;
+        result = result | (n & 1);
+        n = n >> 1;
+    }
+  return result >>> 0; 
+};
+```
+191. Number of 1 Bits
+
+Problem:
+Write a function that takes the binary representation of an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
+
+Solution:
+1. Define a variable count to keep track of the number of bits.
+2. Create a while loop that continues as long as n doesn't equal 0.
+3. Increase the count.
+4. Use bitwise and operator n &= (n - 1).
+5. Return count.
+
+Code:
+```
+var hammingWeight = function(n) {
+    let count = 0;
+    while (n !== 0) {
+        count++;
+        n &= (n - 1);
+    }
+  return count;
+};
+```
 202. Happy Number
 
 Problem:
