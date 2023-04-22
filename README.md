@@ -955,21 +955,27 @@ Problem:
 Write a function that takes the binary representation of an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
 
 Solution:
-1. Define a variable count to keep track of the number of bits.
+1. Define a count variable to keep track of the number of 1 bits.
 2. Create a while loop that continues as long as n doesn't equal 0.
-3. Increase the count.
-4. Use bitwise and operator n &= (n - 1).
-5. Return count.
+3. Define a variable isOne that we will later use to compare if the bit is 1. This uses the and operator, n & 1, which will look at the bit at the end of n and return true if it's 1.
+4. If isOne and 1 are the same, increase count.
+5. Shift n to compare the next end bit using n = n >>> 1.
+6. Return count.
 
 Code:
 ```
 var hammingWeight = function(n) {
     let count = 0;
-    while (n !== 0) {
+
+    while (n !== 0){
+      const isOne = n & 1;
+      if (isOne === 1){
         count++;
-        n &= (n - 1);
+      }
+      n = n >>> 1;
     }
-  return count;
+    
+    return count;
 };
 ```
 202. Happy Number
