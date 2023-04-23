@@ -1370,3 +1370,35 @@ var intersect = function(nums1, nums2) {
     return result;
 };
 ```
+387. First Unique Character in a String
+
+Problem:
+Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1. 
+
+Solution:
+1. Create hash map.
+2. Create a for loop to loop through each character in the array.
+3. Each time the character appears, increment it's number by 1.
+4. Create another for loop to loop through all the characters. If it's number is 1, return the index.
+5. Return -1 at the end as if it's reached that point there are no non-repeating characters.
+
+Code:
+```
+var firstUniqChar = function(s) {
+    let hash = {};
+
+    for (let i = 0; i < s.length; i++){
+        let character = s[i];
+        hash[character] = hash[character] + 1 || 1;
+    }
+
+    for (let i = 0; i < s.length; i++){
+        let character = s[i];
+        if (hash[character] === 1){
+            return i;
+        }
+    }
+
+    return -1;
+};
+```
