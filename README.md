@@ -1402,3 +1402,50 @@ var firstUniqChar = function(s) {
     return -1;
 };
 ```
+## Top 150 Interview Questions - Medium
+
+2. Add Two Numbers
+
+Problem:
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list. You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Solution:
+1. Initialize a new linked list l3 and a current node to point to the head of l3. This will be used to construct the result linked list.
+2. Initialize two pointers p1 and p2 to point to the head of the input linked lists l1 and l2, respectively.
+3. Initialize a carry variable to 0.
+4. Loop through both input linked lists l1 and l2 simultaneously until both pointers p1 and p2, and carry become null:
+5. 
+  a. Calculate the sum of the current digits, along with the carry, by adding the values of p1.val, p2.val, and carry.
+  b. Update the carry variable by dividing the sum by 10 and taking the integer quotient.
+  c. Update the current digit of the result linked list by setting the value of the current node's next pointer to a new ListNode object with the value of the remainder of the sum (i.e., the sum modulo 10).
+  d. Move the current pointer to the next node of the result linked list and move the input pointers p1 and p2 to their respective next nodes.
+6. After the loop, if the carry variable is still non-zero, add a new node to the result linked list with the value of the carry.
+7. Return l3.next, which is the second node, as the first node does not contain a meaningful value.
+
+Code:
+```
+var addTwoNumbers = function(l1, l2) {
+    let carry = 0;
+    let l3 = new ListNode();
+    let current = l3;
+    let p1 = l1, p2 = l2;
+
+    while (p1 || p2 || carry) {
+        let sum = carry;
+        if (p1) {
+            sum += p1.val;
+            p1 = p1.next;
+        }
+        if (p2) {
+            sum += p2.val;
+            p2 = p2.next;
+        }
+        carry = Math.floor(sum / 10);
+        sum = sum % 10;
+        current.next = new ListNode(sum);
+        current = current.next;
+    }
+
+    return l3.next;
+};
+```
