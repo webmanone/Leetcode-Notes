@@ -7,6 +7,53 @@
 
 ## Top 150 Interview Questions - Easy
 
+### 1. Two Sum
+
+Description:
+
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
+
+Solution:
+
+The easy way would be to have 2 nested for loops, comparing avery possible pair, then returning the indexes as the answer:
+
+Code:
+```
+var twoSum = function(nums, target) {
+let sum;
+
+for (let i = 0; i < nums.length; i++){
+    for (let j = i + 1; j < nums.length; j++){
+        sum = nums[i] + nums[j];
+        if (sum === target) {
+            return [i, j];
+        }
+    }
+}
+};
+```
+
+However, this isn't very time efficient. A better way that has time & space complexity O(n) would be:
+1. Create a hash map.
+2. Loop through elements of the array.
+3. Do (target - current) to find what the remainder would be.
+4. If the remainder is already in the hash map, we have found the solution.
+5. Return the index of the element in the hash map and current index.
+6. If the remainder isn't in the hash map, add the element's value and index to the hash map.
+
+Code:
+```
+var twoSum = function(nums, target) {
+    const hash = new Map();
+    for (let i = 0; i < nums.length; i++){
+        const remainder = target - nums[i];
+        if (hash.has(remainder)){
+            return [hash.get(remainder), i];
+        }
+        hash.set(nums[i], i);
+    }
+};
+```
 ### 21. Merge Two Sorted Lists
 
   1.	Create new linked list, initialize to 0
