@@ -15,7 +15,7 @@ Given an array of integers nums and an integer target, return indices of the two
 
 Solution:
 
-The easy way would be to have 2 nested for loops, comparing avery possible pair, then returning the indexes as the answer:
+The easy way would be to have 2 nested for loops, comparing avery possible pair, then returning the indexes as the answer. The best part about this solution is it has O(1) space complexity, however becasue of the nested for loops it has O(n^2) time complexity:
 
 Code:
 ```
@@ -33,7 +33,7 @@ for (let i = 0; i < nums.length; i++){
 };
 ```
 
-However, this isn't very time efficient. A better way that has time & space complexity O(n) would be:
+However, this isn't very time efficient at O(n^2). A better way that has time & space complexity O(n) would be:
 1. Create a hash map.
 2. Loop through elements of the array.
 3. Do (target - current) to find what the remainder would be.
