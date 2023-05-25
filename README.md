@@ -109,6 +109,37 @@ for (let i = 0; i < s.length; i++){
 return result;
 }
 ```
+### 14. Longest Common Prefix
+
+Description:
+Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string "".
+
+Solution (O(nm), O(1)):
+1. Define a variable to contain the first word, which will be used as the prefix we are comparing.
+2. Loop through all the other words.
+3. Create a while loop that runs as long as prefix isn't found in the current word. Can do this by using the indexOf() method if prefix isn't found at 0.
+4. If current prefix isn't found, remove the last letter of prefix by creating a substring.
+5. If the prefix is empty, return the empty string.
+6. Return prefix at the end.
+
+Code:
+```
+var longestCommonPrefix = function(strs) {
+
+  let prefix = strs[0];
+
+  for (let i = 1; i < strs.length; i++){
+      while (strs[i].indexOf(prefix) !== 0){
+          prefix = prefix.substring(0, prefix.length - 1);
+          if (prefix === ""){
+              return "";
+          }
+      }
+  }
+  return prefix;
+};
+```
+
 ### 21. Merge Two Sorted Lists
 
   1.	Create new linked list, initialize to 0
