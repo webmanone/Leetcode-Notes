@@ -193,14 +193,76 @@ var isValid = function(s) {
 ```
 ### 21. Merge Two Sorted Lists
 
-  1.	Create new linked list, initialize to 0
-  2.	Create variable to keep track of current node
-  3.	While list 1 and list 2 aren’t empty, loop through all their nodes
-  4.	If list 1 value is lower than list 2, add it to the new node. Vice versa. Then increment current
-  5.	If they’re both the same, add the node from list 1, then add the node from list 2. Bring current forward an extra node to compensate.
-  6.	Add remaining nodes from whichever list is left.
-  7.	Return new linked list.
+  1.	Check if either list1 or list 2 are null, return the other if so.
+  2.	Create a pointer for the head node.
+  3.    Check which list value is smaller, if it's list 1 assign it to list1 and then increment list1 to list1.next. Vice versa if list 2.
+  4.    Set a current pointer to the head node.
+  5.    Loop while list 1 and list 2 aren't null.
+  6.    If list 1 value is smaller, change current.next to list1, move list1 to next, vice versa for list 2. Don't need one if they're the same, as list2 will be added automatically.
+  7.    Move current to current.next to continue at the end of the loop.
+  8.    Set current.next to either of the lists if there's any ramaining nodes after the while loop.
+  9.    Return head.
 
+Code: 
+(Time O(n + m), Space O(1))
+```
+var mergeTwoLists = function(list1, list2) {
+    if (!list1){
+        return list2;
+    }
+    if (!list2){
+        return list1;
+    }
+    
+    let head;
+
+    if (list1.val < list2.val){
+        head = list1;
+        list1 = list1.next;
+    }
+    else {
+        head = list2;
+        list2 = list2.next;
+    }
+
+    let current = head;
+
+    while (list1 && list2){
+        if (list1.val < list2.val){
+            current.next = list1;
+            list1 = list1.next;
+        } else {
+            current.next = list2;
+            list2 = list2.next;
+        }
+        current = current.next;
+    }
+
+    current.next = list1 || list2;
+
+    return head;
+
+};
+```
+There's also a recursive approach to this problem:
+```
+var mergeTwoLists = function(list1, list2) {
+    if (!list1) {
+    return list2;
+  }
+  if (!list2) {
+    return list1;
+  }
+
+  if (list1.val < list2.val) {
+    list1.next = mergeTwoLists(list1.next, list2);
+    return list1;
+  } else {
+    list2.next = mergeTwoLists(list1, list2.next);
+    return list2;
+  }
+};
+```
 ### 26. Remove Duplicates from Sorted Array
 
 This problem wants you to remove duplicates from a sorted array without creating any new arrays, or removing and adding elements, so elements will have to be overwritten. After the function edits the array, it wants to return how long the list of sorted elements with no duplicates are (k). This is because editing the array without removing/adding elements, but keep it the same size, will end up with lots of duplicates at the end of the array. It asks for k because it wants to only know the list of sorted numbers and doesn’t care about any at the end.
