@@ -1721,3 +1721,83 @@ var addTwoNumbers = function(l1, l2) {
     return l3.next;
 };
 ```
+## Other Useful Stuff
+
+### Common Sorting Algorithms
+
+#### Bubble Sort
+Bubble sort loops through all ements of the array from first to last and swaps adjacent items if they are in the wrong order.
+
+![Bubble-sort-example-300px](https://github.com/webmanone/Leetcode-Notes/assets/66835665/d3ca08b8-9e9f-46ec-928d-26408aef7ca1)
+
+Example code C#:
+```
+public int[] SortArray() 
+{
+    var n = NumArray.Length;
+    for (int i = 0; i < n - 1; i++)
+        for (int j = 0; j < n - i - 1; j++)
+            if (NumArray[j] > NumArray[j + 1])
+            {
+                var tempVar = NumArray[j];
+                NumArray[j] = NumArray[j + 1];
+                NumArray[j + 1] = tempVar;
+            }
+    return NumArray;
+}
+```
+How it works:
+The code uses 2 for loops to compare adjacent items in the array. If elements are in the wrong order, they are swapped using a temporary variable to store the value that's being swapped.
+
+Advantages:
+- Simple to learn and easy to implement.
+- Sorting done in place so it uses constant memory O(1).
+- Adaptabele - can be changed to detect if portions are already sorted.
+Disadvantages:
+- Inefficient as it has time complexity O(n^2).
+
+#### Selection Sort
+Searches through each element to find the smallest value, comparing the current minimum value with the current element. If it's smaller, then a swap happens.
+
+![Selection-Sort-Gif gif_zoom=1](https://github.com/webmanone/Leetcode-Notes/assets/66835665/4ec7b6d0-737c-408e-964c-7644ea64d83f)
+
+Example code in C#:
+```
+public int[] SortArray()
+{
+    var arrayLength = NumArray.Length;
+    for (int i = 0; i < arrayLength - 1; i++)
+    {
+        var smallestVal = i;
+        for (int j = i + 1; j < arrayLength; j++)
+        {
+            if (NumArray[j] < NumArray[smallestVal])
+            {
+                smallestVal = j;
+            }
+        }
+        var tempVar = NumArray[smallestVal];
+        NumArray[smallestVal] = NumArray[i];
+        NumArray[i] = tempVar;
+    }
+    return NumArray;
+}
+```
+How it works:
+The code uses 2 for loops, 1 to loop through all elements of the array aside from the last. A variable is created for the index of the smallest value. For the second loop, looping through all other elements from i, it compares the current smallest value to the current element value. If it's smaller, then it updates the index of the smallest value. Then, once all elements have been searched, a swap happens by using a temporary variable.
+
+Advantages:
+- Simple to learn and easy to implement.
+- Sorting done in place so it uses constant memory O(1).
+- Fewer swaps than bubble sort so may perform better in terms of time complexity.
+Disadvantages:
+- Inefficient as it has time complexity O(n^2).
+
+- Insertion Sort
+- Merge Sort
+- Quick Sort
+- Heap Sort
+- Counting Sort
+- Radix Sort
+- Bucket Sort
+- Shell sort
