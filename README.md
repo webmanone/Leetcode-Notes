@@ -264,6 +264,15 @@ var mergeTwoLists = function(list1, list2) {
 };
 ```
 ### 26. Remove Duplicates from Sorted Array
+Description:
+Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+
+Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
+
+Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
+Return k.
+
+Solution:
 
 This problem wants you to remove duplicates from a sorted array without creating any new arrays, or removing and adding elements, so elements will have to be overwritten. After the function edits the array, it wants to return how long the list of sorted elements with no duplicates are (k). This is because editing the array without removing/adding elements, but keep it the same size, will end up with lots of duplicates at the end of the array. It asks for k because it wants to only know the list of sorted numbers and doesn’t care about any at the end.
 
@@ -271,6 +280,23 @@ This problem wants you to remove duplicates from a sorted array without creating
 2.	Create pointer (j) which loops through every item in the array (including duplicates).
 3.	When J reaches an item that isn’t a duplicate (different from i), increment i by 1 and change it to the value of J. For example. If array is [1, 2], it will just change 2 to 2, but if it’s [1, 1, 2], it will change the 1 to a 2. Since it doesn’t matter what’s at the end of the array that’s fine.
 4.	Return i + 1. It wants to return the number of unique elements. This will be i + 1 because i only tracks unique elements, and we add +1 because it started at 0 since arrays are initialised at 0.
+
+Code:
+(O(n), O(1))
+```
+var removeDuplicates = function(nums) {
+    
+let i = 0;
+
+for (let j = 1; j < nums.length; j++){
+  if (nums[i] !== nums[j]){
+    i++;
+    nums[i] = nums[j];
+  }
+}
+return i + 1;
+};
+```
 
 ### 28. Find the Index of the First Occurrence in a String
 
