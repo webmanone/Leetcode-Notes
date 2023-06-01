@@ -300,15 +300,92 @@ return i + 1;
 
 ### 28. Find the Index of the First Occurrence in a String
 
-Easy solution: return haystack.indexOf(needle);
+Description
+Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack. 
 
 Solution:
+
+Easy + most efficient solution:
+```
+return haystack.indexOf(needle);
+```
+More algorithmic solution:
 1.	Loop through each letter in the haystack. (only until haystack.length – needle.length because the first letter can’t occur later than the length of the haystack – length of the needle.)
 2.	Loop through each letter of the needle (nested for loop with counter defined out of scope).
 3.	If the letter in the needle is not the same as the letter in the haystack, break out of the inner for loop. – To do this we need to compare the index of haystack + index of needle, because at the start it will be 0, but then it needs to check if the second letter is the same.
 4.	Create an if statement that checks if j = needle.length. If so, that means the complete word is in the haystack, and then return the index of the haystack.
 5.	If none of that happens, return -1 as a default.
 
+```
+var strStr = function(haystack, needle) {
+  
+    for (let h = 0; h <= haystack.length - needle.length; h++) {
+      for (let n = 0; n < needle.length; n++){
+        if (haystack[h + n] !== needle[n]){
+          break;
+        }
+      }
+      if (n === needle.length) {
+        return h;
+      }
+    }
+return -1;
+};
+```
+### 66. Plus One
+
+Description:
+You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's. Increment the large integer by one and return the resulting array of digits.
+
+Solution:
+
+1. Loop through the array backwards.
+2. If the digit is 9 and the previous value doesn't exist, push a 0 to the array and change the current digit to 1. (For example, if the array is a [9], it needs to be changed to [1, 0]. Return the array.
+3. Else, if it's a 9, change it to 0.
+4. Else, increment the current digit and return the array.
+
+Code:
+```
+var plusOne = function(digits) {
+        for (let i = digits.length - 1; i >= 0; i--){
+            if (digits[i] === 9 && !digits[i - 1]){
+               digits.push(0);
+               digits[i] = 1;
+               return digits;
+            }
+            else if (digits[i] === 9){
+                     digits[i] = 0;
+            } else {
+                digits[i]++;
+                return digits;
+            }
+        }
+};
+```
+The first condition in this can also be removed if we're simplifying the solution using unshift. The else statement returns the array but the first if statement doesn't. Therefore, the unshift will only happen if all digits were a 9:
+
+```
+var plusOne = function(digits) {
+    for (let i = digits.length - 1; i >= 0; i--) {
+        if (digits[i] === 9) {
+            digits[i] = 0;
+        } else {
+            digits[i]++;
+            return digits;
+        }
+    }
+    digits.unshift(1);
+    return digits;
+};
+```
+You can also do it by converting the type, but this isn't very efficient:
+```
+let x = BigInt(digits.join(""));
+        x += 1n;
+        x = x.toString();
+        let arr = x.split("");
+    return arr;
+```
 ### 69. Sqrt(x)
 
 Description
