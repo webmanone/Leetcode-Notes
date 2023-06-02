@@ -390,7 +390,7 @@ let x = BigInt(digits.join(""));
 
 Description
 
-<p>Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well. You must not use any built-in exponent function or operator. For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.</p>
+Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well. You must not use any built-in exponent function or operator. For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
  
 Binary search method:
 
@@ -437,6 +437,8 @@ After looking through other answers, there's also this pretty simple method:
     }
 
 ### 70. Climbing Stairs
+
+Description:
 
 You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
@@ -597,18 +599,6 @@ Recursive approach:
 
 Code: 
 ```
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {number[]}
- */
 var inorderTraversal = function(root) {
    let result = [];
 
@@ -670,18 +660,6 @@ Solution (recursive):
 Code:
 
 ```
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {boolean}
- */
 var isSymmetric = function(root) {
    
     function isMirror(node1, node2) {
@@ -721,7 +699,6 @@ Solution:
 7. Return depth variable for answer.
 
 Code:
-
 
 ```
 var maxDepth = function(root) {
@@ -991,6 +968,8 @@ var singleNumber = function(nums) {
 };
 ```
 ### 141. Linked List Cycle
+Description:
+Given head, the head of a linked list, determine if the linked list has a cycle in it. There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter. Return true if there is a cycle in the linked list. Otherwise, return false.
 
 Since I found this problem by searching by hash map, I thought the best solution would be hash map and came up this this solution:
 
@@ -1139,6 +1118,7 @@ var getIntersectionNode = function(headA, headB) {
     return pA;
 };
 ```
+
 169. Majority Element
 
 Problem:
@@ -1430,7 +1410,7 @@ var reverseList = function(head) {
     return previous;
 };
 ```
-217. Contains Duplicate
+#### 217. Contains Duplicate
 Problem:
 
 Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
@@ -1478,7 +1458,55 @@ var containsDuplicate = function(nums) {
     return false;
 };
 ```
-242. Valid Anagram
+#### 234. Palindrome Linked List
+Description: Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+Solution:
+1. Use hare and tortoise method to find the middle of the linked list. Define a fast and slow pointer.
+2. While fast & slow aren't null, increment slow by one and fast by 2.
+3. Where slow finishes will be the centre of the linked list, so define current as slow, and set previous and next pointers to null.
+4. Reverse the second half of the linked list by assigning next to current.next, current.next to previous, previous to current, and current to next.
+5. Assign 2 pointers to the heads of each half, first will be head and second will be previous as that's where the list ends after reversing.
+6. While not null, if the value of p1 doesn't equal value of p2, return false. Then check for the next value.
+7. Return true.
+
+Code:
+```
+var isPalindrome = function(head) {
+    let slow = head;
+    let fast = head.next;
+
+    while (fast && fast.next){
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    let current = slow;
+    let previous = null;
+    let next = null;
+
+    while (current){
+        next = current.next;
+        current.next = previous;
+        previous = current;
+        current = next;
+    }
+
+    let p1 = head;
+    let p2 = previous;
+
+    while (p1){
+        if (p1.val !== p2.val){
+            return false
+        }
+        p1 = p1.next;
+        p2 = p2.next;
+    }
+    return true;
+};
+```
+
+#### 242. Valid Anagram
 
 Problem:
 
@@ -1544,7 +1572,7 @@ var isAnagram = function(s, t) {
     return true;
 };
 ```
-268. Missing Number
+#### 268. Missing Number
 
 Problem:
 
@@ -1878,3 +1906,15 @@ Disadvantages:
 - Radix Sort
 - Bucket Sort
 - Shell sort
+
+### Common Search Algorithms
+
+- Linear Search
+- Binary Search
+- Jump Search
+- Interpolation Search
+- Exponential Search
+- Sublist Search
+- Fibonacci Search
+- The Ubiquitous Binary Search
+- String search algorithms.
