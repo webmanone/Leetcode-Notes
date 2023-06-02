@@ -771,7 +771,7 @@ var sortedArrayToBST = function(nums) {
   return node;
 };
 ```
-#118. Pascal's Triangle
+### 118. Pascal's Triangle
 
 Problem:
 
@@ -783,7 +783,7 @@ Solution I got first try:
 
 1. Create a matrix to contain the arrays which will act as the rows of the triangle. 
 2. Initialise the matrix to [1] for the base case that rows = 1. If rows = 1, return the matrix as is.
-3. Update matric to [1], [1, 1] for the case that rows = 2 and return the matrix if it's 2.
+3. Update matrix to [1], [1, 1] for the case that rows = 2 and return the matrix if it's 2.
 4. Create a for loop that cycles through all the rows from row 3 to max row.
 5. Create an array that will reset every loop, and contain the numbers for each row.
 6. Push 1 to the start, since every row will start with 1.
@@ -1118,8 +1118,10 @@ var getIntersectionNode = function(headA, headB) {
     return pA;
 };
 ```
+### 163. Missing Ranges
+PREMIUM
 
-169. Majority Element
+### 169. Majority Element
 
 Problem:
 Given an array nums of size n, return the majority element. The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
@@ -1197,7 +1199,7 @@ const mid = nums.length/2;
 };
 ```
 
-171. Excel Sheet column Number
+### 171. Excel Sheet column Number
 
 Problem: Given a string columnTitle that represents the column title as appears in an Excel sheet, return its corresponding column number.
 
@@ -1254,7 +1256,7 @@ var titleToNumber = function(columnTitle) {
 
 };
 ```
-190. Reverse Bits
+### 190. Reverse Bits
 
 Problem: Reverse bits of a given 32 bits unsigned integer.
 
@@ -1278,7 +1280,7 @@ var reverseBits = function(n) {
   return result >>> 0; 
 };
 ```
-191. Number of 1 Bits
+### 191. Number of 1 Bits
 
 Problem:
 Write a function that takes the binary representation of an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
@@ -1307,7 +1309,7 @@ var hammingWeight = function(n) {
     return count;
 };
 ```
-202. Happy Number
+### 202. Happy Number
 
 Problem:
 
@@ -1375,7 +1377,7 @@ var isHappy = function(n) {
 };
 ```
 
-206. Reverse Linked List
+### 206. Reverse Linked List
 
 Problem:
 
@@ -1410,7 +1412,7 @@ var reverseList = function(head) {
     return previous;
 };
 ```
-#### 217. Contains Duplicate
+### 217. Contains Duplicate
 Problem:
 
 Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
@@ -1458,7 +1460,7 @@ var containsDuplicate = function(nums) {
     return false;
 };
 ```
-#### 234. Palindrome Linked List
+### 234. Palindrome Linked List
 Description: Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
 
 Solution:
@@ -1506,7 +1508,7 @@ var isPalindrome = function(head) {
 };
 ```
 
-#### 242. Valid Anagram
+### 242. Valid Anagram
 
 Problem:
 
@@ -1572,7 +1574,7 @@ var isAnagram = function(s, t) {
     return true;
 };
 ```
-#### 268. Missing Number
+### 268. Missing Number
 
 Problem:
 
@@ -1618,7 +1620,7 @@ function missingNumber(nums) {
     return expectedSum - actualSum;
 }
 ```
-283. Move Zeroes
+### 283. Move Zeroes
 
 Problem:
 
@@ -1652,7 +1654,7 @@ var moveZeroes = function(nums) {
     }
 };
 ```
-326. Power of 3
+### 326. Power of 3
 
 Problem:
 Given an integer n, return true if it is a power of three. Otherwise, return false. An integer n is a power of three, if there exists an integer x such that n == 3^x.
@@ -1678,7 +1680,7 @@ var isPowerOfThree = function(n) {
 };
 ```
 
-344. Reverse String
+### 344. Reverse String
 
 Problem:
 
@@ -1711,7 +1713,7 @@ var reverseString = function(s) {
     return s;
 };
 ```
-350. Intersection of Two Arrays II
+### 350. Intersection of Two Arrays II
 
 Problem:
 Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
@@ -1747,7 +1749,7 @@ var intersect = function(nums1, nums2) {
     return result;
 };
 ```
-387. First Unique Character in a String
+### 387. First Unique Character in a String
 
 Problem:
 Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1. 
@@ -1779,6 +1781,8 @@ var firstUniqChar = function(s) {
     return -1;
 };
 ```
+
+
 ## Top 150 Interview Questions - Medium
 
 2. Add Two Numbers
