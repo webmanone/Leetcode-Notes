@@ -1781,8 +1781,67 @@ var firstUniqChar = function(s) {
     return -1;
 };
 ```
+### 412. Fizz Buzz
 
+Description: 
+Given an integer n, return a string array answer (1-indexed) where:
+answer[i] == "FizzBuzz" if i is divisible by 3 and 5.
+answer[i] == "Fizz" if i is divisible by 3.
+answer[i] == "Buzz" if i is divisible by 5.
+answer[i] == i (as a string) if none of the above conditions are true.
 
+Solution:
+1. Create an array to hold the solution.
+2. Loop through all elements, since it's 1 indexed, start from 1 and end at n+1.
+3. Create a string (or array) to store the current element.
+4. If i is divisible by 3, add Fizz, if 5 then add Buzz, if neither add i.
+5. Push the string (or array) to the result array.
+6. Return array.
+
+Code:
+```
+var fizzBuzz = function(n) {
+    let arr = [];
+    for (let i = 1; i < n + 1; i++){
+       let str = "";
+        if (i % 3 === 0){
+            str += "Fizz";
+        } 
+        if (i % 5 === 0){
+            str += "Buzz";
+        } 
+        if (i % 3 !== 0 && i % 5 !== 0) {
+            str += i;
+        }
+        arr.push(str);
+    }
+    return arr;
+};
+```
+In C#:
+```
+public class Solution {
+    public IList<string> FizzBuzz(int n) {
+        
+        string[] arr = new string[n];
+
+        for (int i = 1; i < n + 1; i++){
+            string str = String.Empty;
+            if (i % 3 == 0){
+                str += "Fizz";
+            }
+            if (i % 5 == 0){
+                str += "Buzz";
+            }
+            if (i % 3 != 0 && i % 5 != 0){
+                str += i;
+            }
+            arr[i - 1] = str;
+        }
+    return arr;
+    }
+}
+```
 ## Top 150 Interview Questions - Medium
 
 2. Add Two Numbers
