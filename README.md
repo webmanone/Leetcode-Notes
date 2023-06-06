@@ -1842,9 +1842,69 @@ public class Solution {
     }
 }
 ```
+## Leftover easies from Top 100 Liked Questions
+
+### 35. Search Insert Position
+
+Description:
+
+Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order. You must write an algorithm with O(log n) runtime complexity.
+
+My first try (without thinking about time complexity):
+```
+var searchInsert = function(nums, target) {
+    let result = nums.indexOf(target);
+
+    if (result === -1){
+        for (let i = 0; i < nums.length; i++){
+            if (target < nums[i]){
+                result = i;
+                break;
+            }
+            if (i === nums.length - 1){
+                result = i + 1;
+            }
+        }
+    }
+
+    return result;
+};
+```
+Although this was faster than 97.5% of solutions on Leetcode, it unfortunately is O(n) because it uses a for loop and uses indexOf.
+
+Solution:
+1. Use a binary search algorithm. Any algorithm having O(logn) time complexity means that it likely reduces the input size by half with each iteration.
+2. Define a left and right pointer of 0 and the end of the array.
+3. While left is smaller than right:
+4. Find the mid point by adding left and right and dividing by 2.
+5. If the index of mid is the same as the target, return mid.
+6. Else, if mid is smaller than the target, that means the target is larger, so move left to be mid + 1.
+7. Else, if mid is bigger than the target, move right to 1 less than mid to narrow the search.
+8. Return left at the end, as this is where the target should be if it was in the array.
+
+```
+var searchInsert = function(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+
+    while (left <= right){
+        let mid = Math.floor((left + right)/2);
+
+        if (nums[mid] === target){
+            return mid;
+        } else if (nums[mid] < target){
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return left;
+};
+```
+
 ## Top 150 Interview Questions - Medium
 
-2. Add Two Numbers
+### 2. Add Two Numbers
 
 Problem:
 You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list. You may assume the two numbers do not contain any leading zero, except the number 0 itself.
