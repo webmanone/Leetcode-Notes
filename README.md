@@ -1901,7 +1901,32 @@ var searchInsert = function(nums, target) {
     return left;
 };
 ```
+### 226. Invert Binary Tree
+Description: Given the root of a binary tree, invert the tree, and return its root.
 
+Solution:
+1. Use a recursive approach. Start by returning null if root is equal to null.
+2. Create a temporary variable to store the left node, then sway it with the right and replace right with temp.
+3. Call the function again on root.left and root.right.
+4. Return the root.
+ 
+Code:
+```
+var invertTree = function(root) {
+    if (root === null){
+        return null;
+    }
+    
+    let temp = root.left;
+    root.left = root.right;
+    root.right = temp;
+
+    invertTree(root.left);
+    invertTree(root.right);
+
+    return root;
+};
+```
 ## Top 150 Interview Questions - Medium
 
 ### 2. Add Two Numbers
