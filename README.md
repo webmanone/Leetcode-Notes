@@ -2066,3 +2066,6 @@ Disadvantages:
 - Fibonacci Search
 - The Ubiquitous Binary Search
 - String search algorithms.
+
+### Questions to research
+How to check if all words in an input line are in a body of larger text and then output a hash table not just with the ones that are found but the ones that aren't found as well and put -1.
