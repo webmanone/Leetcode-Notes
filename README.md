@@ -2069,3 +2069,6 @@ Disadvantages:
 
 ### Questions to research
 How to check if all words in an input line are in a body of larger text and then output a hash table not just with the ones that are found but the ones that aren't found as well and put -1.
+
+### Update
+Thanks to all my hard work practicing these kinds of problems, I performed well in a recent coding assessment centre and got an offer which I'm going to accept!!
