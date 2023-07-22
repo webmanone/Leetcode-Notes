@@ -1842,7 +1842,50 @@ public class Solution {
     }
 }
 ```
-## Leftover easies from Top 100 Liked Questions
+## Leftover easies
+
+### 27. Remove Element
+
+Description:
+
+Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+
+Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+
+Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
+Return k.
+
+My first try:
+```
+var removeElement = function(nums, val) {
+    let k = 0;
+    for (let i = nums.length-1; i >= 0; i--){
+        if (nums[i] === val){
+            k++;
+            nums[i] = nums[nums.length - k];
+        }
+        }
+return nums.length - k;
+};
+```
+Other solution:
+```
+var removeElement = function(nums, val) {
+    let left = 0;
+    let right = nums.length - 1;
+
+    while (left <= right) {
+        if (nums[left] === val) {
+            nums[left] = nums[right];
+            right--;
+        } else {
+            left++;
+        }
+    }
+    return left;
+};
+```
+Both have same time complexity but the second solution is slightly faster.
 
 ### 35. Search Insert Position
 
@@ -1901,6 +1944,7 @@ var searchInsert = function(nums, target) {
     return left;
 };
 ```
+
 ### 226. Invert Binary Tree
 Description: Given the root of a binary tree, invert the tree, and return its root.
 
