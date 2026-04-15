@@ -2018,6 +2018,51 @@ var addTwoNumbers = function(l1, l2) {
     return l3.next;
 };
 ```
+
+### 419. Battleships
+
+Problem:
+Given an m x n matrix board where each cell is a battleship 'X' or empty '.', return the number of the battleships on board.
+
+Battleships can only be placed horizontally or vertically on board. In other words, they can only be made of the shape 1 x k (1 row, k columns) or k x 1 (k rows, 1 column), where k can be of any size. At least one horizontal or vertical cell separates between two battleships (i.e., there are no adjacent battleships).
+
+Example 1:
+Input: board = [["X",".",".","X"],[".",".",".","X"],[".",".",".","X"]]
+Output: 2
+Example 2:
+Input: board = [["."]]
+Output: 0
+
+Solution:
+1. The challenge is to return the number of battleships. The board is m x n, so we won't know the size immediately. First step is to find how many rows and how many columns. A matrix is a list of lists, so to find the height (number of rows), we can just find the length of the list. And to find the width (number of columns), we find the length of the first list [0] in the matrix.
+2. Define a count, so it can be added to in the for loop.
+3. We need to loop through all the squares. Because it's a matrix we need a nested for loop to do this.
+4. Then, we check if the current square/index we are on is an 'X'.
+5. However, within this if, we need another if to check that the current 'X' isn't a continuation of a ship we already counted on the current row, so we check if the square to the left of the 'X' isn't also an 'X', and continue through the loop if so.
+6. We also need to check if it's not a continuation of a vertical ship that's on the same column, so we check if the square above is an 'X', continuing through the loop if so. 
+7. Increase the count by 1 if we've confirmed that there's no square above or to the left. We don't need to check below or to the right, because when we get to that square, if there is an X, we won't add to the count because there will be an 'X' to the left or above it.
+8. Return the count.
+
+Code:
+Python
+```
+class Solution(object):
+    def countBattleships(self, board):
+        count = 0
+        rows = len(board)
+        columns = len(board[0])
+        for i in range(rows):
+            for j in range(columns):
+                if board[i][j] == "X":
+                    if i > 0 and board[i-1][j] == "X":
+                        continue
+                    if j > 0 and board[i][j-1] == "X":
+                        continue
+
+                    count += 1
+        return count
+```
+
 ## Other Useful Stuff
 
 ### Common Sorting Algorithms
