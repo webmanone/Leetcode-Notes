@@ -386,6 +386,67 @@ let x = BigInt(digits.join(""));
         let arr = x.split("");
     return arr;
 ```
+
+### 67. Add Binary
+
+Description
+
+Given two binary strings a and b, return their sum as a binary string.
+
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+
+Constraints:
+
+1 <= a.length, b.length <= 104
+a and b consist only of '0' or '1' characters.
+Each string does not contain leading zeros except for the zero itself.
+
+Solution:
+
+1. Binary addition works by going right to left. 0 + 0 = 0, 1 + 0 = 1, 1 + 1 = 1 (carry 1).
+2. Loop through each string from right to left. To do this we need a while loop, starting at the last character. To find the last character we use i and j to find the length of a and b, but -1 becuase of 0 based indexing.
+3. Define a çarry int variable and a result list that we can add to.
+4. Start the while loop, we have to check if i >= 0, j >=0 and if carry is present.
+5. Start by defining the total as the carry, which will be 0 if no carry, 1 if there is carry.
+6. If i is more or equal to 0, add the int conversion of the index to the total.
+7. Reduce the i index by 1.
+8. If j is more or equal to 0, add the int conversion of the index to the total.
+9. Reduce the j index by 1.
+10. Update result by getting the string of the total of the result modular 2, so that it's turned into 0 or 1, then add the result on to the end of that.
+11. Then, update the carry by doing floor division, dividing the total by 2, so if total is 3 it rounds down from 1.5 to 1.
+12. Then, return the result.
+
+Code:
+```
+class Solution(object):
+    def addBinary(self, a, b):
+        i = len(a) - 1
+        j = len(b) - 1
+        carry = 0
+        result = ""
+
+        while i >= 0 or j >= 0 or carry:
+            total = carry
+
+            if i >= 0:
+                total += int(a[i])
+                i -= 1
+            if j >= 0:
+                total += int(b[j])
+                j -= 1
+
+            result = str(total % 2) + result
+            carry = total // 2
+
+        return result
+```
 ### 69. Sqrt(x)
 
 Description
