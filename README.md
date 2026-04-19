@@ -1182,6 +1182,65 @@ var getIntersectionNode = function(headA, headB) {
 ### 163. Missing Ranges
 PREMIUM
 
+### 168. Excel Sheet Column Title
+
+Description:
+
+Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.
+
+For example:
+
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28 
+...
+ 
+
+Example 1:
+
+Input: columnNumber = 1
+Output: "A"
+Example 2:
+
+Input: columnNumber = 28
+Output: "AB"
+Example 3:
+
+Input: columnNumber = 701
+Output: "ZY"
+ 
+
+Constraints:
+
+1 <= columnNumber <= 231 - 1
+
+Solution:
+1. First define a result array so each letter can be stores/appended. Also define an alphabet string to store each letter.
+2. We need to start at the last letter since this one changes fastest. Therefore, a while loop is needed that stops when the number reaches 0.
+3. Then, reduce the number we're given by 1, so we can get back to 0 as the first index, and because when finding the remainder, if divisible by 26, there is no 0th numer.
+4. Find and store the remainder. So column number modular 26.
+5. Prepend the letter in the alphabet that matches the remainder to the array.
+6. Divide the column number by 26 with floor division, so we can assess what the next letter will be.
+7. Return the result.
+
+Code:
+```
+def convertToTitle(columnNumber):
+    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    result = ""
+
+    while columnNumber > 0:
+        columnNumber -= 1
+        remainder = columnNumber % 26
+        result = letters[remainder] + result
+        columnNumber //= 26
+
+    return result
+```
 ### 169. Majority Element
 
 Problem:
