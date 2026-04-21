@@ -1376,6 +1376,19 @@ var titleToNumber = function(columnTitle) {
 
 };
 ```
+
+Python:
+Key thing to remember is result = result * 26 + value
+```
+def titleToNumber(columnTitle: str) -> int:
+    result = 0
+    
+    for char in columnTitle:
+        value = ord(char) - ord('A') + 1
+        result = result * 26 + value
+    
+    return result
+```
 ### 190. Reverse Bits
 
 Problem: Reverse bits of a given 32 bits unsigned integer.
