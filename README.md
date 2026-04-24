@@ -2104,6 +2104,57 @@ var invertTree = function(root) {
     return root;
 };
 ```
+### 2833. Furthest Point From Origin
+You are given a string moves of length n consisting only of characters 'L', 'R', and '_'. The string represents your movement on a number line starting from the origin 0.
+
+In the ith move, you can choose one of the following directions:
+
+move to the left if moves[i] = 'L' or moves[i] = '_'
+move to the right if moves[i] = 'R' or moves[i] = '_'
+Return the distance from the origin of the furthest point you can get to after n moves.
+
+ 
+
+Example 1:
+
+Input: moves = "L_RL__R"
+Output: 3
+Explanation: The furthest point we can reach from the origin 0 is point -3 through the following sequence of moves "LLRLLLR".
+Example 2:
+
+Input: moves = "_R__LL_"
+Output: 5
+Explanation: The furthest point we can reach from the origin 0 is point -5 through the following sequence of moves "LRLLLLL".
+Example 3:
+
+Input: moves = "_______"
+Output: 7
+Explanation: The furthest point we can reach from the origin 0 is point 7 through the following sequence of moves "RRRRRRR".
+ 
+
+Constraints:
+
+1 <= moves.length == n <= 50
+moves consists only of characters 'L', 'R' and '_'.
+
+Solution:
+It doesn't matter the order in which you add them up, all you need to do is count number of L's and R's and carry the _'s. Then find absolute total, so if L is bigger, the negative will turn positive, and add the carry to get the answer.
+
+Code:
+```
+def furthestDistanceFromOrigin(self, moves):
+        total = 0
+        carry = 0
+        for char in moves:
+            if char == 'L':
+                total -=1
+            elif char == 'R':
+                total +=1
+            else:
+                carry += 1
+        
+        return abs(total) + carry
+```
 ## Top 150 Interview Questions - Medium
 
 ### 2. Add Two Numbers
@@ -2196,7 +2247,7 @@ class Solution(object):
         return count
 ```
 
-### Find the degree of each vertex
+### 3xxx Find the degree of each vertex
 Description:
 You are given a 2D integer array matrix of size n x n representing the adjacency matrix of an undirected graph with n vertices labeled from 0 to n - 1.
 
