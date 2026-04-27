@@ -1787,6 +1787,90 @@ var moveZeroes = function(nums) {
     }
 };
 ```
+
+### 290. Word Pattern
+
+Problem:
+Given a pattern and a string s, find if s follows the same pattern.
+
+Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s. Specifically:
+
+Each letter in pattern maps to exactly one unique word in s.
+Each unique word in s maps to exactly one letter in pattern.
+No two letters map to the same word, and no two words map to the same letter.
+ 
+
+Example 1:
+
+Input: pattern = "abba", s = "dog cat cat dog"
+
+Output: true
+
+Explanation:
+
+The bijection can be established as:
+
+'a' maps to "dog".
+'b' maps to "cat".
+Example 2:
+
+Input: pattern = "abba", s = "dog cat cat fish"
+
+Output: false
+
+Example 3:
+
+Input: pattern = "aaaa", s = "dog cat cat dog"
+
+Output: false
+
+ 
+
+Constraints:
+
+1 <= pattern.length <= 300
+pattern contains only lower-case English letters.
+1 <= s.length <= 3000
+s contains only lowercase English letters and spaces ' '.
+s does not contain any leading or trailing spaces.
+All the words in s are separated by a single space.
+
+Solution:
+Overview - The idea is, we need to group the pairings together in an array, create a hashmap for letter to word and one for word to letter (so we can check dog only maps to 'a' and 'a' only maps to dog) loop through the array . Then we loop through the array with the pairings, and check seperately in each map if the mapping is different to the word/character we are testing. If it is different, return false, if not, create the mapping.
+
+1. Split the words string into an array.
+2. Check if the length of the words array is equal to the pattern, if not return false.
+3. Create a character to word hashmap and a word to character hashmap.
+4. Create a paired array using zip to match the pairs up.
+5. Loop through the paired array with character, word
+6. If the character is already in the character to word map, and the value of the map of the character isn't equal to the word, return false.
+7. Check the same if for word to character.
+8. Assign character to word in the map, assign word to character in the map.
+9. Return true
+
+Code:
+```
+class Solution(object):
+    def wordPattern(self, pattern, s):
+        words = s.split()
+
+        if len(pattern) != len(words):
+            return False
+
+        character_to_word = {}
+        word_to_character = {}
+
+        paired_array = zip(pattern, words)
+        for character, word in paired_array:
+            if character in character_to_word and character_to_word[character] != word:
+                return False
+            if word in word_to_character and word_to_character[word] != character:
+                return False
+            character_to_word[character] = word
+            word_to_character[word] = character
+        
+        return True
+```
 ### 326. Power of 3
 
 Problem:
